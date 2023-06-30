@@ -119,12 +119,14 @@ setInterval(function () {
         ctx.fillRect(0, 0, canvas.width, canvas.height)
     }
     if (lightsON == true) {
-        baldi.update()
+        baldi.move()
+        baldi.draw()
     }
+    baldi.update()
 
     GameState.update()
 
-    if (GameState.state != 'game over') {
+    if (!Baldi.killedYou && GameState.state != 'game over') {
         Dialogue.update()
     }
    
