@@ -178,7 +178,7 @@ class CardMaker {
         c.beginPath();
         c.roundRect(frameTransform.pos.x + 300,
             frameTransform.pos.y + 110,
-            600,
+            400,
             90, 15);
         c.fillStyle = "rgba(252, 132, 3, 1)"
         c.fill()
@@ -202,12 +202,12 @@ class CardMaker {
         )
 
         //rarity
-        c.font = 'bold ' + 60 + 'px sans-serif'
+        c.font = 'bold ' + 40 + 'px sans-serif'
         c.fillStyle = "rgb(255, 255, 255)"
         c.textAlign = "left"
         var textpos = {
             x: textpos.x,
-            y: textpos.y + 60,
+            y: textpos.y + 40,
         }
 
         c.fillText('Rare',
@@ -216,14 +216,14 @@ class CardMaker {
         )
 
 
-        c.drawImage(cardImg, frameTransform.pos.x + 60, frameTransform.pos.y + 110, 190, 250) //drawing background
+        c.drawImage(cardImg, frameTransform.pos.x + 40, frameTransform.pos.y + 110, 190, 250) //drawing background
 
         //answer title
         c.font = 'bold ' + 35 + 'px sans-serif'
         c.fillStyle = "rgb(50, 50, 50)"
         c.textAlign = "left"
         var center = {
-            x: frameTransform.pos.x + 60,
+            x: frameTransform.pos.x + 40,
             y: frameTransform.pos.y + 465 - 20,
         }
 
@@ -247,12 +247,12 @@ class CardMaker {
         )
 
         //type
-        c.font = 'bold ' + 60 + 'px sans-serif'
+        c.font = 'bold ' + 40 + 'px sans-serif'
         c.fillStyle = "rgb(255, 255, 255)"
         c.textAlign = "left"
         var textpos = {
             x: textpos.x,
-            y: textpos.y + 60,
+            y: textpos.y + 40,
         }
 
         c.fillText('Troop',
@@ -261,14 +261,14 @@ class CardMaker {
         )
 
 
-        c.drawImage(cardImg, frameTransform.pos.x + 60, frameTransform.pos.y + 110, 190, 250) //drawing background
+        c.drawImage(cardImg, frameTransform.pos.x + 40, frameTransform.pos.y + 110, 190, 250) //drawing background
 
         //answer title
         c.font = 'bold ' + 35 + 'px sans-serif'
         c.fillStyle = "rgb(50, 50, 50)"
         c.textAlign = "left"
         var center = {
-            x: frameTransform.pos.x + 60,
+            x: frameTransform.pos.x + 40,
             y: frameTransform.pos.y + 465 - 20,
         }
 
@@ -295,7 +295,7 @@ class CardMaker {
             }
             const answerTransform = {
                 pos: {
-                    x: frameTransform.pos.x + 60 + offset.x,
+                    x: frameTransform.pos.x + 40 + offset.x,
                     y: frameTransform.pos.y + 465 + offset.y,
                 },
                 width: answerSize.width,
@@ -310,7 +310,7 @@ class CardMaker {
                 c.fillStyle = "rgba(200, 200, 200, 1)"
             }
             else {
-                c.fillStyle = "rgba(260, 260, 260, 1)"
+                c.fillStyle = "rgba(240, 240, 240, 1)"
             }
             
             c.fill()
