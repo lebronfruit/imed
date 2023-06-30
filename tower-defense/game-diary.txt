@@ -1,0 +1,81 @@
+cards are filled from answering questions right
+
+separate server from client
+-make a serever handling everything
+
+-move gui and drawing methods and systems into client
+
+client.currentplayer = player.A
+
+client.guiupdate()
+	--relating to client.currentplayer
+	--calculate pawns position relatively to client.currentplayer
+
+
+Player.getOrientatedPosition(x, y)
+	return this.orientation === 0 ? [x, y] : [x, canvas.height - y]
+PlayerA.orientation = 0
+PlayerB.orientation = 180
+client.playas(Player.A)
+client.playas(Player.B)
+
+FIRST TEST -FLIP TOWERS related to currentplayer
+
+make game server compatible with nodejs
+
+
+
+
+
+
+
+
+
+enemy can spawn pawns AI bot
+
+
+
+
+clue system (constesting questions)
+
+que hace el aciclovir?
+
+canvas class (relative sizes behavior)
+
+
+
+you click in an area of screen and display the card from the pawn inside
+
+getting the answer right will give you a counter card from the oponents enemy into your deck pile 
+
+if you use all your cards you run out of cards and can't do any more attacks
+untilt you contest your oponents' cards you can get more cards, however eleixir will be regening anyway
+
+//pawns attack towers but can't hit
+hypothesis: distance calculations are not correctly gotten from screen,
+acorrding to the player's getOrientedPos method   
+--getOrientedPos is the same in all players
+--information passed through getOrientedPos is wrongly biased
+--FIXED: min and max positions are not peprfectly chosen when 
+using getOrientedPos, must do manually, also removed width and height for this calc
+on Tower.js LINE 199
+
+--pawn kills tower, and keeps attacking it after the tower is destroyed
+hypothesis: tower is not removed from player.EnemyService.towerList
+
+--enemy towers from currentplayer do not shoot currentplayer's pawns
+but currentplayer towers do shoot enemy pawns
+HYPOTHESIS: tower does fire projectioles, but projectile's
+both spawn & aim coords is wrong
+
+--currentpayer towerse shoots to enemy pawns
+but enemy towers shoot to currentplayer's pawns in the wrong direction
+projectile spawn coords are right on the enemy towers's, 
+hypothesis: deltaposition is wrong, thus targetcenter and pos
+retrieved from getOrientedPos is wrongly used:
+	- targetcenter position is right.
+	- projectile starter position is right
+	-deltaPosition is wrong
+FIXED: LINE 56 Tower.js, fifxing substraction order on deltapositionRaw into 
+deltaposition: reason, substraction different when obtaining out of screenpos
+NOTE: must add a method to make substractions out of getScreenPos coords translation

@@ -1,0 +1,20 @@
+ADD static coord to the ViewManager and make
+all the objects rely on that position, so all objects must draw
+their position relative to ViewManager.viewpos
+
+
+viewing CardManager seems to blend both cardmanager and 
+quickstart on the background
+however, quickstart which is p(1, 0) does render solo, with no issues 
+positionsi on quickkmatchbutton frm quickstart does only work
+when the viewpos is according to quickstart, but still
+the drawings are showed behind the  CardManager smh
+
+HYPOTHESIS: 
+	0) the problem is on quickstart, that one should be removed when
+	cardmanager is displayed
+
+	a) getViewPos() method logic not working properly with
+	pre-negative viewpos + actual pos of page
+	
+	b) 

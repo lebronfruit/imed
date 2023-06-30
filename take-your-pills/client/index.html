@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="client/index.css" />
+    <meta charset="utf-8" />
+    <title>Take A Pill</title>
+</head>
+<!--<script type= "text/javascript" src="/client/Homepage.js"></script>-->
+<script>
+    function quickMatchClick() {
+        window.location.href = '/client/Game.html'
+    }
+</script>
+
+<div class="Homepage">
+    <div class='user-progress'>
+        <div class='user-profile'>
+            Dr. colloy
+        </div>
+        <div class='user-elo'>
+            305
+        </div>
+        <img class='user-elo-icon'
+             src="client/assets/Trophy.png"
+             alt="An trophy." />
+    </div>
+    <br></br>
+    <div>
+        <center>
+            <img class='ancient-logo'
+                 src="client/assets/AncientStudent.png"
+                 alt="An ancient student." />
+        </center>
+    </div>
+    <button class='game-button orange'
+            style="left: 50%; transform: translateX(-50%);"
+            onclick="quickMatchClick()">
+        Quick Match!
+
+    </button>
+</div>
