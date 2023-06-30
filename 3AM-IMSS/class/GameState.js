@@ -8,7 +8,7 @@ class GameState {
 
 	static update() {
 		if (GameState.state === 'game over' || false) {
-			ctx.fillStyle = 'rgba(0, 0, 0, 0.8)'
+			ctx.fillStyle = 'rgba(0, 0, 0, 1)'
 			ctx.fillRect(0, 0, canvas.width, canvas.height)
 
 			ctx.textAlign = 'center'

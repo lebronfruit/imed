@@ -62,19 +62,19 @@ class CardManager {
     static activeSlidetap = false
     static isHoveringSlidetap() {
         const getPos = CardManager.getViewPos
-        return (mouse.x > getPos().x + canvas.width - 40 && mouse.x < getPos().x + canvas.width
+        return (mouse.x > getPos().x + canvas.width - 60 && mouse.x < getPos().x + canvas.width
             && mouse.y > getPos().y && mouse.y < getPos().y + canvas.height)
     }
 
     static drawTapQstart() {
         //adding gradient
-        var length = 40
+        var length = 60
         var x = CardManager.getViewPos().x + canvas.width - length
         var y = CardManager.getViewPos().y
         c.fillStyle = 'rgba(0, 0, 0, 0.5)'
         c.fillRect(x, y, length, canvas.height)
 
-        const size = 40
+        const size = 60
         c.drawImage(arrowImg, x, y+canvas.height / 2 - size / 2, size, size)
     }
     
@@ -178,7 +178,7 @@ class CardMaker {
         c.beginPath();
         c.roundRect(frameTransform.pos.x + 300,
             frameTransform.pos.y + 110,
-            400,
+            600,
             90, 15);
         c.fillStyle = "rgba(252, 132, 3, 1)"
         c.fill()
@@ -202,12 +202,12 @@ class CardMaker {
         )
 
         //rarity
-        c.font = 'bold ' + 40 + 'px sans-serif'
+        c.font = 'bold ' + 60 + 'px sans-serif'
         c.fillStyle = "rgb(255, 255, 255)"
         c.textAlign = "left"
         var textpos = {
             x: textpos.x,
-            y: textpos.y + 40,
+            y: textpos.y + 60,
         }
 
         c.fillText('Rare',
@@ -247,12 +247,12 @@ class CardMaker {
         )
 
         //type
-        c.font = 'bold ' + 40 + 'px sans-serif'
+        c.font = 'bold ' + 60 + 'px sans-serif'
         c.fillStyle = "rgb(255, 255, 255)"
         c.textAlign = "left"
         var textpos = {
             x: textpos.x,
-            y: textpos.y + 40,
+            y: textpos.y + 60,
         }
 
         c.fillText('Troop',
@@ -310,7 +310,7 @@ class CardMaker {
                 c.fillStyle = "rgba(200, 200, 200, 1)"
             }
             else {
-                c.fillStyle = "rgba(240, 240, 240, 1)"
+                c.fillStyle = "rgba(260, 260, 260, 1)"
             }
             
             c.fill()

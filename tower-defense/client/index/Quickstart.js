@@ -24,13 +24,13 @@ class Quickstart {
     static activeSlidetap = false
     static isHoveringSlidetap() {
         const getPos = Quickstart.getViewPos
-        return (mouse.x > getPos().x && mouse.x < getPos().x + 40
+        return (mouse.x > getPos().x && mouse.x < getPos().x + 60
             && mouse.y > getPos().y && mouse.y < getPos().y + canvas.height)
     }
 
     static draw() {
         c.drawImage(QSBgImage, Quickstart.getViewPos().x, Quickstart.getViewPos().y, canvas.width, canvas.height) //drawing background
-        c.drawImage(arenafloaterImg, Quickstart.getViewPos().x + canvas.width / 2 - 220, Quickstart.getViewPos().y + canvas.height / 2 - 330, 440, 440)
+        c.drawImage(arenafloaterImg, Quickstart.getViewPos().x + canvas.width / 2 - 220, Quickstart.getViewPos().y + canvas.height / 2 - 330, 460, 460)
 
     }
 
@@ -38,7 +38,7 @@ class Quickstart {
         //adding gradient
         var x = Quickstart.getViewPos().x
         var y = Quickstart.getViewPos().y
-        var length = 40
+        var length = 60
         //console.log('crealineargradient x, y, l, y', x, y, length, y)
         var grd = c.createLinearGradient(x, y, length, y)
         grd.addColorStop(0.2, "rgba(0, 0, 0, 0.7)");
@@ -50,7 +50,7 @@ class Quickstart {
 
         c.save()
         c.rotate(Math.PI * 1)
-        const size = 40
+        const size = 60
         c.drawImage(arrowImg, x-size, y-canvas.height / 2 - size / 2, size, size)
         c.restore()
     }

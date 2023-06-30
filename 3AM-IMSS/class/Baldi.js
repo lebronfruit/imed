@@ -19,7 +19,7 @@ class Baldi {
             x: playerA.transform.x,
             y: playerA.transform.y,
         }
-        this.maxSpd = 5
+        this.maxSpd = 20
 
         let spdX = 0
         let spdY = 0

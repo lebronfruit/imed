@@ -17,7 +17,7 @@ class Player {
         }
         this.spdX = 0
         this.spdY = 0
-        this.maxSpd = 4
+        this.maxSpd = 6
         Player.list.push(this)
     }
 
