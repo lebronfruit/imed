@@ -20,7 +20,7 @@ hfdownImg.src = 'assets/handfingerdown.png'
 
 
 const vitalsImg = new Image()
-vitalsImg.src = 'assets/arterialpressure.png'
+vitalsImg.src = 'assets/bloodpressureTool.png'
 
 
 
@@ -91,7 +91,7 @@ class Patient {
             setTimeout(() => {
                 this.needs.bloodpressure = true
                 this.needs.bloodpressureStart = undefined
-            }, 10000 * Math.random(10, 20))
+            }, 1000 * Math.random(10, 20))
         }
     }
 
