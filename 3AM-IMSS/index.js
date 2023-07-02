@@ -14,6 +14,10 @@ const ctx = canvas.getContext('2d')
 ctx.canvas.width = 14 * 64 //window.innerWidth; 896
 ctx.canvas.height = 24 * 64 //window.innerHeight; 1536
 
+function clamp(num, min, max) {
+    return Math.min(Math.max(num, min), max)
+}
+
 
 
 const mapImg = new Image()
@@ -25,6 +29,21 @@ playerImg.src = 'assets/medic.png'
 class World {
     static speed = 1000 / 100
 }
+
+
+const hospitalSound = new Audio('assets/mentalHospital.mp3');
+var firstWindowClick = false
+var firstSetupDone = false
+setInterval(() => {
+    if (firstWindowClick === true && firstSetupDone === false) {
+        firstSetupDone = true
+
+        
+        hospitalSound.loop = true
+        hospitalSound.play()
+    }
+})
+
 
 
 
@@ -88,19 +107,33 @@ for (var i = 0; i < 4; i++) {
 
 let lightsON = false
 function tickLight() {
+    const dur = Math.random(3, 15)/10
+
     setTimeout(() => {
         lightsON = true
-    }, 1000 * 0.3)
+    }, 1000 * dur)
 
     setTimeout(() => {
         lightsON = false
-    }, 1000 * 0.4)
+    }, 1000 * (dur + 0.1))
 
     setTimeout(() => {
         tickLight()
-    }, 1000 * 5)
+    }, 1000 * (dur + 5))
 }
 tickLight()
+
+
+function getDistance(a, b) {
+    var deltaPosition = {
+        x: Math.abs(a.x - b.x),
+        y: Math.abs(a.y - b.y),
+    }
+    return Math.sqrt(deltaPosition.x ** 2 + deltaPosition.y ** 2)
+}
+
+const promptAudio = new Audio('assets/selectSound0.mp3');
+const selectAudio = new Audio('assets/selectSound1.mp3');
 
 setInterval(function () {
     ctx.drawImage(mapImg, 0, 0, canvas.width, canvas.height)
@@ -108,21 +141,46 @@ setInterval(function () {
     ctx.fillStyle = 'white'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
     */
-    Patient.updatePatients()
-    Player.updatePlayers()
-    
 
     
 
-    if (lightsON == false) {
-        ctx.fillStyle = 'rgba(20, 20, 50, 0.85)'
-        ctx.fillRect(0, 0, canvas.width, canvas.height)
+    if (Baldi.killedYou) {
+        baldi.baldiKilledYou()
     }
-    if (lightsON == true) {
-        baldi.move()
-        baldi.draw()
+
+    if (!Baldi.killedYou && GameState.state != 'game over') {
+        Patient.updatePatients()
+        Player.updatePlayers()
+
+        if (lightsON == true) {
+            baldi.move()
+            baldi.draw()
+        }
+        else {
+            baldi.playingFootsteps = false
+        }
+
+        baldi.update()
+
+        if (lightsON == false) {
+            ctx.fillStyle = 'rgba(20, 20, 50, 0.85)'
+            ctx.fillRect(0, 0, canvas.width, canvas.height)
+        }
+
+        playerA.selection.bloodpressure = null
+        for (let i = 0; i < Patient.list.length; i++) {
+            const patient = Patient.list[i]
+            if (patient.needs.bloodpressure === true
+                && getDistance(patient.transform, playerA.transform) < 50) {
+                
+                playerA.selection.bloodpressure = patient
+                break
+            }
+        }
+    
+        Patient.updateActions()
+        Player.updateActions()
     }
-    baldi.update()
 
     GameState.update()
 
@@ -131,7 +189,6 @@ setInterval(function () {
     }
    
 }, World.speed)
-
 
 class Controller {
 
@@ -143,17 +200,26 @@ class Controller {
 
 }
 
+
+window.addEventListener('mousedown', (event) => {
+    firstWindowClick = true
+})
+
 window.addEventListener('mousemove', (event) => {
     mouse.update(event)
     if (mouse.down) {
         playerA.targetpoint = { x: mouse.x, y: mouse.y }
     }
-    
+
 })
 
 canvas.addEventListener('mousedown', (event) => {
     mouse.down = true
     playerA.targetpoint = { x: mouse.x, y: mouse.y }
+
+    if (playerA.can.bloodpressure()) {
+        playerA.play.bloodpressure(playerA.selection.bloodpressure)
+    }
 })
 
 canvas.addEventListener('mouseup', (event) => {

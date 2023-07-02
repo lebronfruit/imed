@@ -1,3 +1,9 @@
+const bpImg = new Image()
+bpImg.src = 'assets/checkAP.png'
+
+const bpAudio = new Audio('assets/bloodpressureSound.mp3');
+const taskCompleteAudio = new Audio('assets/taskCompleteSound.mp3');
+
 class Player {
 
     static targetPos = null
@@ -19,6 +25,45 @@ class Player {
         this.spdY = 0
         this.maxSpd = 6
         Player.list.push(this)
+
+        this.selection = {
+            bloodpressure: null
+        }
+
+        this.action = {
+            bloodpressure: false
+        }
+        const player = this
+        this.can = {
+            bloodpressure: function () {
+               
+                return (player.selection.bloodpressure && player.action.bloodpressure == false)
+            }
+        }
+
+        this.play = {
+            bloodpressure: function (patient) {
+                if (player.action.bloodpressure == false) {
+                    selectAudio.play()
+                    player.action.bloodpressure = true
+
+                    patient.needs.bloodpressure = false
+                    patient.action.bloodpressure = true
+
+                    bpAudio.play()
+
+                    setTimeout(() => {
+                        patient.needs.bloodpressure = false
+                        patient.action.bloodpressure = false
+                        player.action.bloodpressure = false
+
+                        taskCompleteAudio.play()
+                    }, 1000 * 3)
+                }
+               
+                ctx.drawImage(bpImg, -canvas.height /2 , 0, canvas.height*2, canvas.height)
+            }
+        }
     }
 
     draw() {
@@ -77,13 +122,22 @@ class Player {
         this.transform.x += spdX * this.maxSpd
         this.transform.y += spdY * this.maxSpd
     }
-        
+
+    updateActions() {
+        if (this.action.bloodpressure) {
+            this.play.bloodpressure()
+        }
+    }
 
     static updatePlayers() {
         Player.list.forEach(player => {
             player.update()
             player.draw()
         })
+    }
+
+    static updateActions() {
+        playerA.updateActions()
     }
 
 }

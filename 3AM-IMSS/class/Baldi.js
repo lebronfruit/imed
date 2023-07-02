@@ -5,6 +5,7 @@ const baldiJumpscareImg = new Image()
 baldiJumpscareImg.src = 'assets/baldiJumpscare.png'
 
 const baldiJumpscareAudio = new Audio('assets/baldiJumpscare.mp3');
+const runningFootstepsAudio = new Audio('assets/runningFootsteps.mp3');
 
 class Baldi {
 
@@ -14,6 +15,7 @@ class Baldi {
     static height = 200;
 
     constructor(transform = { x: 0, y: 0, width: Baldi.width, height: Baldi.height }) {
+        this.playingFootsteps = false
         this.transform = transform
     }
 
@@ -22,6 +24,12 @@ class Baldi {
     }
 
     move() {
+        if (this.playingFootsteps === false && firstWindowClick === true) {
+            this.playingFootsteps = true
+            runningFootstepsAudio.play()
+        }
+
+
         this.targetpoint = {
             x: playerA.transform.x,
             y: playerA.transform.y,
@@ -51,6 +59,13 @@ class Baldi {
     }
 
     update() {
+        if (this.playingFootsteps === false && runningFootstepsAudio.paused === false) {
+            setTimeout(() => {
+                runningFootstepsAudio.pause()
+            }, 1000 * 0.5)
+            
+        }
+
         if (this.targetpoint) {
             const targetpoint = this.targetpoint
             if (Math.abs(Math.round(this.transform.x) - Math.round(targetpoint.x)) < this.transform.width / 2 &&
@@ -58,6 +73,7 @@ class Baldi {
                 this.targetpoint = null
                 if (GameState.state === 'playing') {
 
+                    hospitalSound.pause()
                     baldiJumpscareAudio.play()
                     Baldi.killedYou = true
                     Baldi.jumpscareActive = true
@@ -73,13 +89,19 @@ class Baldi {
         
 
 
-        if (Baldi.killedYou === true) {
-            ctx.fillStyle = 'rgba(0, 0, 0, 1)'
-            ctx.fillRect(0, 0, canvas.width, canvas.height)
+        
+    }
 
-            const size = 1200
-            ctx.drawImage(baldiJumpscareImg, canvas.width / 2 - size / 2, canvas.height / 2 - size / 2, size, size)
-        }
+    baldiKilledYou() {
+        runningFootstepsAudio.pause()
+        bpAudio.pause()
+        taskCompleteAudio.pause()
+
+        ctx.fillStyle = 'rgba(0, 0, 0, 1)'
+        ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+        const size = 1200
+        ctx.drawImage(baldiJumpscareImg, canvas.width / 2 - size / 2, canvas.height / 2 - size / 2, size, size)
     }
 
 }

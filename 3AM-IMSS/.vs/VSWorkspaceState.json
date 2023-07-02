@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\assets",
+    "\\class"
   ],
-  "SelectedNode": "\\index.html",
+  "SelectedNode": "\\class\\Patient.js",
   "PreviewInSolutionExplorer": false
 }
