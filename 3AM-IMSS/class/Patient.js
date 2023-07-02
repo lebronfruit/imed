@@ -20,7 +20,7 @@ hfdownImg.src = 'assets/handfingerdown.png'
 
 
 const vitalsImg = new Image()
-vitalsImg.src = 'assets/arterialPressure.png'
+vitalsImg.src = 'assets/arterialpressure.png'
 
 
 
